@@ -113,6 +113,10 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
+# Quest CI secrets and the release keystore. Copy .env into GitHub Actions secrets.
+.env
+*.keystore
+
 # Tutorial walkthrough videos stay local. .meta files stay tracked so clip GUIDs remain stable.
 # Other .webm files are still tracked, through Git LFS (see .gitattributes).
 /[Aa]ssets/[Tt]utorials/[Mm]edia/*.webm
