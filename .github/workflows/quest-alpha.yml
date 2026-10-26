@@ -142,8 +142,20 @@ jobs:
           path: ${{ steps.apk.outputs.path }}
           if-no-files-found: error
 
+      # setup-ovr-platform-util@v1 crashes on current util output
+      # ("208.0.0") because its version regex requires four segments
+      # (RageAgainstThePixel/setup-ovr-platform-util#33). Install the
+      # Linux binary ourselves and put it on PATH for the upload action.
       - name: Install Oculus Platform Utility
-        uses: RageAgainstThePixel/setup-ovr-platform-util@v1
+        run: |
+          set -euo pipefail
+          install_dir="${RUNNER_TEMP}/ovr-platform-util"
+          mkdir -p "$install_dir"
+          curl -fsSL -o "$install_dir/ovr-platform-util" \
+            'https://www.oculus.com/download_app/?id=5159709737372459'
+          chmod +x "$install_dir/ovr-platform-util"
+          echo "$install_dir" >> "$GITHUB_PATH"
+          "$install_dir/ovr-platform-util" version
 
       - name: Upload to Meta ALPHA channel
         id: upload
