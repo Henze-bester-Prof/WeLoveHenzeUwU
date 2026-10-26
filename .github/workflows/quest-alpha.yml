@@ -53,17 +53,6 @@ jobs:
         with:
           lfs: true
 
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          tool-cache: false
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
-
       - name: Require Unity, keystore, and Meta secrets
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
